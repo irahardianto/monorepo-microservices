@@ -1,5 +1,5 @@
 database:
-  mongoDbHost: "localhost"
+  mongoDbHost: "192.168.0.5"
   mongoDbName: "db"
   mongoDbUser: "root"
   mongoDbPassword: "123"

@@ -12,14 +12,14 @@ import (
 	"github.com/irahardianto/monorepo-microservices/users/router"
 	"github.com/irahardianto/monorepo-microservices/users/storage/mongodb"
 	"github.com/spf13/viper"
-9p
+
 	mgo "gopkg.in/mgo.v2"
 )
 
 func init() {
-	viper.SetConfigType("yaml")
+	viper.AddConfigPath("config")
 	viper.SetConfigName("config")
-	viper.AddConfigPath("cmd/showtimes")
+	viper.SetConfigType("yaml")
 
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file, %s", err)

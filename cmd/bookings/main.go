@@ -17,9 +17,9 @@ import (
 )
 
 func init() {
-	viper.SetConfigType("yaml")
+	viper.AddConfigPath("config")
 	viper.SetConfigName("config")
-	viper.AddConfigPath("cmd/bookings")
+	viper.SetConfigType("yaml")
 
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file, %s", err)
