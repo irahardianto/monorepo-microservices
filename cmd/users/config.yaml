@@ -1,0 +1,7 @@
+database:
+  mongoDbHost: "localhost"
+  mongoDbName: "db"
+  mongoDbUser: "root"
+  mongoDbPassword: "123"
+server:
+  port: "8080"

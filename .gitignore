@@ -10,3 +10,23 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+.DS_Store
+*.[56789ao]
+*.a[56789o]
+*.pyc
+._*
+.nfs.*
+[56789a].out
+*~
+*.orig
+*.rej
+.*.swp
+main
+app
+*.cgo*.go
+*.cgo*.c
+_cgo_*
+_obj
+_test
+_testmain.go

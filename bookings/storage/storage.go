@@ -1,0 +1,11 @@
+package storage
+
+import (
+	"github.com/irahardianto/microservice-monorepo/bookings/model"
+)
+
+type Storage interface {
+	GetAll() []model.Booking
+	Create(booking *model.Booking) error
+	Delete(id string) error
+}
