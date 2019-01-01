@@ -1,6 +1,6 @@
 # Cinema Monorepo Microservices in Go
 
-## Introductions
+## Introduction
 
 Hey! Welcome, The Cinema Monorepo Microservices project is an example of working implementation of Go for building multiple microservices using a single code repository. 
 
@@ -37,7 +37,11 @@ Readme ToDos
 - [x] Intro
 - [ ] How to build the project
 - [ ] Project structure
+- [ ] Cmd
 - [ ] Viper
+- [ ] Go mod
 - [ ] Auth with JWT
+- [ ] Docker
+- [ ] Multi-stage build
 - [ ] Kubernetes
 - [ ] CI Pipeline

@@ -3,8 +3,8 @@ package router
 import (
 	"github.com/go-chi/chi"
 
-	"github.com/irahardianto/microservice-monorepo/bookings/httphandler"
-	"github.com/irahardianto/microservice-monorepo/bookings/storage"
+	"github.com/irahardianto/monorepo-microservices/bookings/httphandler"
+	"github.com/irahardianto/monorepo-microservices/bookings/storage"
 )
 
 func InitRouter(r *chi.Mux, s storage.Storage) *chi.Mux {

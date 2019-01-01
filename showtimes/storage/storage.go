@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/irahardianto/microservice-monorepo/showtimes/model"
+	"github.com/irahardianto/monorepo-microservices/showtimes/model"
 )
 
 type Storage interface {
