@@ -1,10 +1,11 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
-	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -27,12 +28,22 @@ func init() {
 }
 
 func main() {
-	session, err := mgo.DialWithInfo(&mgo.DialInfo{
-		Addrs:    []string{viper.GetString("database.mongoDbHost")},
-		Username: viper.GetString("database.mongoDbUser"),
-		Password: viper.GetString("database.mongoDbPassword"),
-		Timeout:  60 * time.Second,
-	})
+	//URI without ssl=true
+	var mongoURI = viper.GetString("database.atlasConnectionString")
+	dialInfo, err := mgo.ParseURL(mongoURI)
+	if err != nil {
+		panic(err)
+	}
+
+	tlsConfig := &tls.Config{}
+	tlsConfig.InsecureSkipVerify = true
+
+	dialInfo.DialServer = func(addr *mgo.ServerAddr) (net.Conn, error) {
+		conn, err := tls.Dial("tcp", addr.String(), tlsConfig)
+		return conn, err
+	}
+	session, err := mgo.DialWithInfo(dialInfo)
+
 	if err != nil {
 		log.Fatalf("[createDbSession]: %s\n", err)
 	}

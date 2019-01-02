@@ -20,17 +20,16 @@ The project is based on the project written by [Manuel Morejón](https://github.
 - [x] Microservices implementation
 - [x] Folder structuring
 - [x] Env implementation using Viper
+- [x] MongoDB using Atlas
+- [x] Dockerfile to build services
 - [ ] Custom logger to handle panic & other error
 - [ ] Auth implementation with JWT
 - [ ] Services JWT verification
 - [ ] Services JWT usage
-- [ ] Dockerfile to build services
 - [ ] Kubernetes services deployment
-- [ ] MongoDB Statefulsets using pd-gce
-- [ ] Rook operator with Ceph
-- [ ] MongoDB Statefulsets using Ceph provisioner
-- [ ] Federated Kubernetes
 - [ ] CI pipeline using CircleCI, Travis?
+- [ ] Explore Rook operator
+- [ ] Federated Kubernetes
 
 Readme ToDos
 

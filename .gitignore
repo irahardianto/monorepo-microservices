@@ -30,3 +30,5 @@ _cgo_*
 _obj
 _test
 _testmain.go
+server.key
+server.crt
