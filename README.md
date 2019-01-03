@@ -15,6 +15,81 @@ The Cinema backend is powered by 4 microservices written in Go, using MongoDB as
 
 The project is based on the project written by [Manuel Morejón](https://github.com/mmorejon).
 
+## Get Started
+-  [Build The Project](https://github.com/irahardianto/monorepo-microservices#build-the-project)
+-  [Project Structure](https://github.com/irahardianto/monorepo-microservices#project-structure)
+-  [The Cmd Folder](https://github.com/irahardianto/monorepo-microservices#cmd)
+---
+
+## [Build The Project](https://github.com/irahardianto/monorepo-microservices#build-the-project)
+
+### Run the go app
+
+### Run using docker
+
+---
+
+## [Project Structure](https://github.com/irahardianto/monorepo-microservices#project-structure)
+
+    /  
+    |- bookings 
+       |- httphandler
+          |- httphandler.go
+          |- resource.go
+       |- grpcserver
+       |- model
+          |- model.go
+       |- router
+          |- router.go
+       |- storage
+          |- mongodb
+          storage.go
+    |- cmd
+       |- bookings
+          |- main.go
+       |- bookingsgrpc
+       |- movies
+       |- moviesgrpc
+       |- showtimes
+       |- showtimesgrpc
+       |- users
+       |- usersgrpc
+    |- config 
+    |- k8s
+       |- microservices
+       |- ingress
+    |- movies
+    |- showtimes
+    |- users
+    |- utils
+       |- logger.go
+    |- vendor
+    Dockerfile
+    go.mod
+    go.sum 
+
+### bookings
+
+### cmd
+
+### config
+
+### k8s
+
+### utils
+
+### vendor
+
+### Dockerfile
+
+### go.mod & go.sum
+
+---
+
+## [The Cmd Folder](https://github.com/irahardianto/monorepo-microservices#cmd)
+
+---
+
  Implementation ToDos
 
 - [x] Microservices implementation
@@ -23,10 +98,13 @@ The project is based on the project written by [Manuel Morejón](https://github.
 - [x] MongoDB using Atlas
 - [x] Dockerfile to build services
 - [ ] Custom logger to handle panic & other error
+- [ ] Implement gRPC for the services
 - [ ] Auth implementation with JWT
 - [ ] Services JWT verification
 - [ ] Services JWT usage
-- [ ] Kubernetes services deployment
+- [x] Kubernetes services deployment files
+- [x] Kubernetes expose deployment internally via NodePort
+- [ ] Kubernetes ingress configurations using Istio ingress controller
 - [ ] CI pipeline using CircleCI, Travis?
 - [ ] Explore Rook operator
 - [ ] Federated Kubernetes
@@ -34,11 +112,13 @@ The project is based on the project written by [Manuel Morejón](https://github.
 Readme ToDos
 
 - [x] Intro
+- [ ] Table of Content (Get Started)
 - [ ] How to build the project
 - [ ] Project structure
 - [ ] Cmd
 - [ ] Viper
 - [ ] Go mod
+- [ ] gRPC
 - [ ] Auth with JWT
 - [ ] Docker
 - [ ] Multi-stage build
