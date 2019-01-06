@@ -30,43 +30,39 @@ The project is based on the project written by [Manuel Morejón](https://github.
 ---
 
 ## [Project Structure](https://github.com/irahardianto/monorepo-microservices#project-structure)
-
-    /  
-    |- bookings 
-       |- httphandler
-          |- httphandler.go
-          |- resource.go
-       |- grpcserver
-       |- model
-          |- model.go
-       |- router
-          |- router.go
-       |- storage
-          |- mongodb
-          storage.go
-    |- cmd
-       |- bookings
-          |- main.go
-       |- bookingsgrpc
-       |- movies
-       |- moviesgrpc
-       |- showtimes
-       |- showtimesgrpc
-       |- users
-       |- usersgrpc
-    |- config 
-    |- k8s
-       |- microservices
-       |- ingress
-    |- movies
-    |- showtimes
-    |- users
-    |- utils
-       |- logger.go
-    |- vendor
-    Dockerfile
-    go.mod
-    go.sum 
+    .
+    ├── Dockerfile
+    ├── bookings
+    │   ├── httphandler
+    │   │   ├── httphandler.go
+    │   │   └── resource.go
+    │   ├── grpcserver
+    │   ├── model
+    │   ├── router
+    │   └── storage
+    │       ├── mongodb
+    │       │   └── storage.go
+    │       └── storage.go
+    ├── cmd
+    │   ├── bookings
+    │   │   └── main.go
+    │   ├── bookingsgrpc
+    │   ├── movies
+    │   ├── moviessgrpc
+    │   ├── showtimes
+    │   ├── showtimesgrpc
+    │   ├── users
+    │   └── usersgrpc
+    ├── config
+    ├── go.mod
+    ├── go.sum
+    ├── k8s
+    │   ├── ingress
+    │   └── microservices
+    ├── movies
+    ├── showtimes
+    ├── users
+    └── vendor
 
 ### bookings
 
@@ -98,6 +94,7 @@ The project is based on the project written by [Manuel Morejón](https://github.
 - [x] MongoDB using Atlas
 - [x] Dockerfile to build services
 - [ ] Custom logger to handle panic & other error
+- [ ] Refactor Chi to Kataras/Muxie, if Muxie cost lower resources, benchmark!
 - [ ] Implement gRPC for the services
 - [ ] Auth implementation with JWT
 - [ ] Services JWT verification
@@ -105,6 +102,8 @@ The project is based on the project written by [Manuel Morejón](https://github.
 - [x] Kubernetes services deployment files
 - [x] Kubernetes expose deployment internally via NodePort
 - [ ] Kubernetes ingress configurations using Istio ingress controller
+- [x] Implement Liveness and Readiness probe for services
+- [ ] Refactor Kubernetes deployment to Helm Chart
 - [ ] CI pipeline using CircleCI, Travis?
 - [ ] Explore Rook operator
 - [ ] Federated Kubernetes

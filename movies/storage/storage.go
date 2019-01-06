@@ -9,4 +9,5 @@ type Storage interface {
 	Create(movie *model.Movie) error
 	GetById(id string) (movie model.Movie, err error)
 	Delete(id string) error
+	Ping() error
 }

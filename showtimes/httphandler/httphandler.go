@@ -2,6 +2,7 @@ package httphandler
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi"
@@ -84,5 +85,25 @@ func DeleteShowTime(s storage.Storage) http.HandlerFunc {
 
 		// Send response back
 		w.WriteHeader(http.StatusNoContent)
+	})
+}
+
+func GetReadiness(s storage.Storage) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		err := s.Ping()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(fmt.Sprintf("error: %v", err)))
+		} else {
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte("ok"))
+		}
+	})
+}
+
+func GetLiveness() http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("ok"))
 	})
 }

@@ -47,3 +47,16 @@ func (s *Storage) Delete(id string) error {
 	err := c.Remove(bson.M{"_id": bson.ObjectIdHex(id)})
 	return err
 }
+
+func (s *Storage) Ping() error {
+	var pingStatus error
+
+	err := s.Session.Ping()
+	if err != nil {
+		pingStatus = err
+	} else {
+		pingStatus = nil
+	}
+
+	return pingStatus
+}

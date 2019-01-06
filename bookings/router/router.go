@@ -15,5 +15,8 @@ func InitRouter(r *chi.Mux, s storage.Storage) *chi.Mux {
 		r.Delete("/{id}", httphandler.DeleteBooking(s))
 	})
 
+	r.Get("/healthy", httphandler.GetReadiness(s))
+	r.Get("/healthz", httphandler.GetLiveness())
+
 	return r
 }
