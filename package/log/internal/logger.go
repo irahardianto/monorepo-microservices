@@ -1,6 +1,6 @@
 package internal
 
-import "github.com/irahardianto/monorepo-mocroservices/package/log/internal/zaplog"
+import "github.com/irahardianto/monorepo-microservices/package/log/internal/zaplog"
 
 // Debug add log entry with or without fields to debug level
 func Debug(msg string, data interface{}) {

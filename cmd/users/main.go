@@ -9,9 +9,9 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/render"
-	"github.com/irahardianto/monorepo-mocroservices/package/log"
-	"github.com/irahardianto/monorepo-mocroservices/users/router"
-	"github.com/irahardianto/monorepo-mocroservices/users/storage/mongodb"
+	"github.com/irahardianto/monorepo-microservices/package/log"
+	"github.com/irahardianto/monorepo-microservices/users/router"
+	"github.com/irahardianto/monorepo-microservices/users/storage/mongodb"
 	"github.com/spf13/viper"
 
 	mgo "gopkg.in/mgo.v2"

@@ -1,6 +1,6 @@
 package httphandler
 
-import "github.com/irahardianto/monorepo-mocroservices/bookings/model"
+import "github.com/irahardianto/monorepo-microservices/bookings/model"
 
 type (
 	// For Get - /bookings

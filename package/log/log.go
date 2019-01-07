@@ -1,6 +1,6 @@
 package log
 
-import log "github.com/irahardianto/monorepo-mocroservices/package/log/internal"
+import log "github.com/irahardianto/monorepo-microservices/package/log/internal"
 
 // Debug add log entry with debug level
 func Debug(msg string, data interface{}) {

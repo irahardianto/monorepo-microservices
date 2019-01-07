@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/irahardianto/monorepo-mocroservices/movies/storage"
+	"github.com/irahardianto/monorepo-microservices/movies/storage"
 
 	mgo "gopkg.in/mgo.v2"
 )
