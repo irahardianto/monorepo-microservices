@@ -1,8 +1,6 @@
 package storage
 
-import (
-	"github.com/irahardianto/monorepo-microservices/movies/model"
-)
+import "github.com/irahardianto/monorepo-mocroservices/movies/model"
 
 type Storage interface {
 	GetAll() []model.Movie

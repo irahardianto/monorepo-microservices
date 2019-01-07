@@ -3,15 +3,15 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
-	"log"
 	"net"
 	"net/http"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/render"
-	"github.com/irahardianto/monorepo-microservices/users/router"
-	"github.com/irahardianto/monorepo-microservices/users/storage/mongodb"
+	"github.com/irahardianto/monorepo-mocroservices/package/log"
+	"github.com/irahardianto/monorepo-mocroservices/users/router"
+	"github.com/irahardianto/monorepo-mocroservices/users/storage/mongodb"
 	"github.com/spf13/viper"
 
 	mgo "gopkg.in/mgo.v2"
@@ -23,7 +23,7 @@ func init() {
 	viper.SetConfigType("yaml")
 
 	if err := viper.ReadInConfig(); err != nil {
-		log.Fatalf("Error reading config file, %s", err)
+		log.Fatal("Error reading config file", err)
 	}
 }
 
@@ -45,7 +45,7 @@ func main() {
 	session, err := mgo.DialWithInfo(dialInfo)
 
 	if err != nil {
-		log.Fatalf("[createDbSession]: %s\n", err)
+		log.Fatal("error while creating session", err)
 	}
 
 	s := &mongodb.Storage{session.DB(viper.GetString("database.mongoDbName"))}
@@ -60,5 +60,7 @@ func main() {
 
 	router := router.InitRouter(r, s)
 
-	log.Fatalf("%s", http.ListenAndServe(fmt.Sprintf(":%s", viper.GetString("server.port")), router))
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", viper.GetString("server.port")), router); err != nil {
+		log.Fatal("error while serve http server", err)
+	}
 }
