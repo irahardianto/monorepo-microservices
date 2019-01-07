@@ -1,0 +1,53 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: mongodb-atlas
+spec:
+  hosts:
+  - cluster0-shard-00-00-3mxxa.gcp.mongodb.net
+  - cluster0-shard-00-01-3mxxa.gcp.mongodb.net
+  - cluster0-shard-00-02-3mxxa.gcp.mongodb.net
+  ports:
+  - number: 27017
+    name: mongo
+    protocol: MONGO
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mongodb-atlas
+spec:
+  hosts:
+  - cluster0-shard-00-00-3mxxa.gcp.mongodb.net
+  - cluster0-shard-00-01-3mxxa.gcp.mongodb.net
+  - cluster0-shard-00-02-3mxxa.gcp.mongodb.net
+  tls:
+  - match:
+    - port: 27017
+      sni_hosts:
+      - cluster0-shard-00-00-3mxxa.gcp.mongodb.net
+    route:
+    - destination:
+        host: cluster0-shard-00-00-3mxxa.gcp.mongodb.net
+        port:
+          number: 27017
+  - match:
+    - port: 27017
+      sni_hosts:
+      - cluster0-shard-00-01-3mxxa.gcp.mongodb.net
+    route:
+    - destination:
+        host: cluster0-shard-00-01-3mxxa.gcp.mongodb.net
+        port:
+          number: 27017
+  - match:
+    - port: 27017
+      sni_hosts:
+      - cluster0-shard-00-02-3mxxa.gcp.mongodb.net
+    route:
+    - destination:
+        host: cluster0-shard-00-02-3mxxa.gcp.mongodb.net
+        port:
+          number: 27017

@@ -101,7 +101,8 @@ The project is based on the project written by [Manuel Morejón](https://github.
 - [ ] Services JWT usage
 - [x] Kubernetes services deployment files
 - [x] Kubernetes expose deployment internally via NodePort
-- [ ] Kubernetes ingress configurations using Istio ingress controller
+- [x] Kubernetes ingress configurations using Istio ingress controller
+- [x] Kubernetes Istio egress configurations
 - [x] Implement Liveness and Readiness probe for services
 - [ ] Refactor Kubernetes deployment to Helm Chart
 - [ ] CI pipeline using CircleCI, Travis?
