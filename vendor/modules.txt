@@ -16,6 +16,10 @@ github.com/hashicorp/hcl/hcl/scanner
 github.com/hashicorp/hcl/hcl/strconv
 github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
+# github.com/irahardianto/monorepo-microservices v0.0.0-20190107164223-ef7c3efa180b
+github.com/irahardianto/monorepo-microservices/showtimes/model
+github.com/irahardianto/monorepo-microservices/showtimes/storage
+github.com/irahardianto/monorepo-microservices/showtimes/httphandler
 # github.com/magiconair/properties v1.8.0
 github.com/magiconair/properties
 # github.com/mitchellh/mapstructure v1.1.2
