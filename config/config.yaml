@@ -1,7 +1,8 @@
+app:
+  jwt_key: "p9eG7R9IoaFCHGB3HcikAaCyR5QSraCGXnwcMcA1vGHkSvfrDcMDLhMXwxpZ"
 database:
-  atlasConnectionString: "mongodb://dbUser:123@cluster0-shard-00-00-3mxxa.gcp.mongodb.net:27017,cluster0-shard-00-01-3mxxa.gcp.mongodb.net:27017,cluster0-shard-00-02-3mxxa.gcp.mongodb.net:27017/test?replicaSet=Cluster0-shard-0&authSource=admin"
+  #atlasConnectionString: "mongodb://dbUser:123@cluster0-shard-00-00-3mxxa.gcp.mongodb.net:27017,cluster0-shard-00-01-3mxxa.gcp.mongodb.net:27017,cluster0-shard-00-02-3mxxa.gcp.mongodb.net:27017/test?replicaSet=Cluster0-shard-0&authSource=admin"
+  atlasConnectionString: "mongodb://novian:Gudegjawa2211@cluster0-shard-00-00-w3iia.gcp.mongodb.net:27017,cluster0-shard-00-01-w3iia.gcp.mongodb.net:27017,cluster0-shard-00-02-w3iia.gcp.mongodb.net:27017/test?replicaSet=Cluster0-shard-0&authSource=admin"
   mongoDbName: "db"
 server:
   port: "8080"
-
-  

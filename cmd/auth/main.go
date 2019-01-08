@@ -10,9 +10,8 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/render"
 	"github.com/irahardianto/monorepo-microservices/package/log"
-	"github.com/irahardianto/monorepo-microservices/users/router"
-	"github.com/irahardianto/monorepo-microservices/users/storage/mongodb"
-	authmiddleware "github.com/irahardianto/monorepo-microservices/users/middleware"
+	"github.com/irahardianto/monorepo-microservices/auth/router"
+	"github.com/irahardianto/monorepo-microservices/auth/storage/mongodb"
 	"github.com/spf13/viper"
 
 	mgo "gopkg.in/mgo.v2"
@@ -57,15 +56,11 @@ func main() {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Logger)
 	r.Use(middleware.URLFormat)
-	r.Use(authmiddleware.ValidateToken)
 	r.Use(render.SetContentType(render.ContentTypeJSON))
 
 	router := router.InitRouter(r, s)
 
-	// if err := http.ListenAndServe(fmt.Sprintf(":%s", viper.GetString("server.port")), router); err != nil {
-	// 	log.Fatal("error while serve http server", err)
-	// }
-	if err := http.ListenAndServe(fmt.Sprintf(":%s", "8081"), router); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", viper.GetString("server.port")), router); err != nil {
 		log.Fatal("error while serve http server", err)
 	}
 }

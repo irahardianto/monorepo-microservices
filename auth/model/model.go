@@ -12,4 +12,10 @@ type (
 		Username  string        `json:"username"`
 		Password  string        `json:"password"`
 	}
+
+	AuthReponse struct {
+		ID       bson.ObjectId `bson:"_id,omitempty" json:"id"`
+		Username string        `json:"username"`
+		Token    string        `json:"token"`
+	}
 )
