@@ -5,59 +5,66 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/irahardianto/monorepo-microservices/auth/model"
-
-	"github.com/spf13/viper"
-
-	"github.com/irahardianto/monorepo-microservices/auth/storage"
-	"github.com/irahardianto/monorepo-microservices/package/authenticator/jwt"
+	"github.com/irahardianto/monorepo-microservices/auth/httphandler/interactor"
+	"github.com/irahardianto/monorepo-microservices/auth/storage/mongodb"
 )
 
-// Authenticate is a Handler for HTTP POST - "/authenticate"
-// Returns token for valid request
-func Authenticate(s storage.Storage) http.HandlerFunc {
+type AuthHandler struct {
+	login   interactor.LoginInteractor
+	storage *mongodb.Storage
+}
+
+func NewAuthHandler(login interactor.LoginInteractor,
+	storage *mongodb.Storage) *AuthHandler {
+	return &AuthHandler{
+		login:   login,
+		storage: storage,
+	}
+}
+
+// Login is a handler for hhtp POST - "/login"
+// return auth token with refresh token
+func (ah *AuthHandler) Login() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var dataResourse UserResource
-		// Decode the incoming Mov08ie json
+		// Decode the incoming user json
 		err := json.NewDecoder(r.Body).Decode(&dataResourse)
 		if err != nil {
 			panic(err)
 		}
 
-		usrData := &dataResourse.Data
-
-		user, _ := s.GetByUsernameAndPassword(usrData.Username, usrData.Password)
-		if user.ID == "" {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(fmt.Sprint("error: unauthorized user")))
-		}
-
-		key := viper.GetString("app.jwt_key")
-		token, err := jwt.Sign([]byte(key))
+		token, err := ah.login.Login(dataResourse.Data)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(fmt.Sprint("error: unauthorized user")))
 		}
 
-		result, err := json.Marshal(model.AuthReponse{
-			ID:       user.ID,
-			Username: user.Username,
-			Token:    token,
-		})
-		if err != nil {
-			panic(err)
-		}
-
-		// Send response back
-		w.Header().Set("Content-Type", "application/json")
+		setAuthAndRefreshCookies(&w, token.AuthToken, token.RefreshToken)
+		w.Header().Set("X-CSRF-Token", token.CSRFKey)
 		w.WriteHeader(http.StatusOK)
-		w.Write(result)
 	})
 }
 
-func GetReadiness(s storage.Storage) http.HandlerFunc {
+func setAuthAndRefreshCookies(w *http.ResponseWriter, authTokenString string, refreshTokenString string) {
+	authCookie := http.Cookie{
+		Name:     "AuthToken",
+		Value:    authTokenString,
+		HttpOnly: true,
+	}
+
+	http.SetCookie(*w, &authCookie)
+
+	refreshCookie := http.Cookie{
+		Name:     "RefreshToken",
+		Value:    refreshTokenString,
+		HttpOnly: true,
+	}
+
+	http.SetCookie(*w, &refreshCookie)
+}
+
+func (ah *AuthHandler) GetReadiness() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		err := s.Ping()
+		err := ah.storage.Ping()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(fmt.Sprintf("error: %v", err)))
@@ -68,7 +75,7 @@ func GetReadiness(s storage.Storage) http.HandlerFunc {
 	})
 }
 
-func GetLiveness() http.HandlerFunc {
+func (ah *AuthHandler) GetLiveness() http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("ok"))

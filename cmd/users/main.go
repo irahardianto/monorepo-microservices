@@ -12,7 +12,7 @@ import (
 	"github.com/irahardianto/monorepo-microservices/package/log"
 	"github.com/irahardianto/monorepo-microservices/users/router"
 	"github.com/irahardianto/monorepo-microservices/users/storage/mongodb"
-	authmiddleware "github.com/irahardianto/monorepo-microservices/users/middleware"
+	//authmiddleware "github.com/irahardianto/monorepo-microservices/users/middleware"
 	"github.com/spf13/viper"
 
 	mgo "gopkg.in/mgo.v2"
@@ -57,7 +57,7 @@ func main() {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Logger)
 	r.Use(middleware.URLFormat)
-	r.Use(authmiddleware.ValidateToken)
+	//r.Use(authmiddleware.ValidateToken)
 	r.Use(render.SetContentType(render.ContentTypeJSON))
 
 	router := router.InitRouter(r, s)

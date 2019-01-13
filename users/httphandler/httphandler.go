@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/irahardianto/monorepo-microservices/package/hasher"
+
 	"github.com/go-chi/chi"
 	"github.com/irahardianto/monorepo-microservices/users/storage"
 
@@ -40,7 +42,9 @@ func CreateUser(s storage.Storage) http.HandlerFunc {
 		}
 		user := &dataResource.Data
 
-		fmt.Printf("USER REQUST : %+v", user)
+		//hash userpassword
+		user.Password = hasher.SHA256(user.Password)
+
 		// Create User
 		s.Create(user)
 		// Create response data

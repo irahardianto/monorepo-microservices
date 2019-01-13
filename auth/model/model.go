@@ -13,9 +13,14 @@ type (
 		Password  string        `json:"password"`
 	}
 
+	AuthToken struct {
+		ID  bson.ObjectId `bson:"_id,omitempty" json:"id"`
+		Jti string        `json:"jti"`
+	}
+
 	AuthReponse struct {
-		ID       bson.ObjectId `bson:"_id,omitempty" json:"id"`
-		Username string        `json:"username"`
-		Token    string        `json:"token"`
+		ID        bson.ObjectId `bson:"_id,omitempty" json:"id"`
+		Username  string        `json:"username"`
+		CSRFToken string        `json:"csrf_token"`
 	}
 )
