@@ -27,7 +27,7 @@ spec:
     - uri:
         exact: /movies
     route:
-    - destination:
+    - destination:  
         host: "cinema-movies-svc"
         port:
           number: 80
