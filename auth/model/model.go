@@ -18,6 +18,11 @@ type (
 		Jti string        `json:"jti"`
 	}
 
+	RefreshToken struct {
+		ID    bson.ObjectId `bson:"_id,omitempty" json:"id"`
+		Token string        `json:"token"`
+	}
+
 	AuthReponse struct {
 		ID        bson.ObjectId `bson:"_id,omitempty" json:"id"`
 		Username  string        `json:"username"`
