@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/irahardianto/monorepo-microservices/package/hasher"
+
 	"github.com/go-chi/chi"
 	"github.com/irahardianto/monorepo-microservices/users/storage"
 
@@ -32,12 +34,17 @@ func GetUsers(s storage.Storage) http.HandlerFunc {
 func CreateUser(s storage.Storage) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var dataResource UserResource
+
 		// Decode the incoming User json
 		err := json.NewDecoder(r.Body).Decode(&dataResource)
 		if err != nil {
 			panic(err)
 		}
 		user := &dataResource.Data
+
+		//hash userpassword
+		user.Password = hasher.SHA256(user.Password)
+
 		// Create User
 		s.Create(user)
 		// Create response data

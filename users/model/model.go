@@ -6,8 +6,10 @@ import (
 
 type (
 	User struct {
-		Id       bson.ObjectId `bson:"_id,omitempty" json:"id"`
-		Name     string        `json:"name"`
-		LastName string        `json:"lastname"`
+		ID        bson.ObjectId `bson:"_id,omitempty" json:"id"`
+		FirstName string        `json:"firstname"`
+		LastName  string        `json:"lastname"`
+		Username  string        `json:"username"`
+		Password  string        `json:"password"`
 	}
 )

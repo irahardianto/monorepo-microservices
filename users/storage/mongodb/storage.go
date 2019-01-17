@@ -26,7 +26,7 @@ func (s *Storage) Create(user *model.User) error {
 	c := s.C("users")
 
 	obj_id := bson.NewObjectId()
-	user.Id = obj_id
+	user.ID = obj_id
 	err := c.Insert(&user)
 	return err
 }
