@@ -12,11 +12,7 @@ type Storage struct {
 
 func (s *Storage) GetByUsernameAndPassword(username, password string) (model.User, error) {
 	c := s.C("users")
-<<<<<<< HEAD
 	filter := bson.M{"username": username, "password": password}
-=======
-	filter := bson.M{"username": username}
->>>>>>> b00cbadd684588c8a0405e81688866a2c52df0f9
 
 	user := model.User{}
 	err := c.Find(filter).One(&user)
