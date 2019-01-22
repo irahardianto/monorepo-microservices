@@ -1,0 +1,142 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.servicesName.users }}
+  namespace: {{ .Release.Name }}
+  labels:
+    app: {{ .Values.servicesName.users }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.servicesName.users }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.servicesName.users }}
+    spec:
+      containers:
+      - name: {{ .Values.servicesName.users }}
+        image: {{ .Values.servicesImage.users }}
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.readinessProbe.endpoint }}
+            port: {{ .Values.deployment.readinessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.deployment.livenessProbe.endpoint }}
+            port: {{ .Values.deployment.livenessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.servicesName.showtimes }}
+  namespace: {{ .Release.Name }}
+  labels:
+    app: {{ .Values.servicesName.showtimes }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.servicesName.showtimes }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.servicesName.showtimes }}
+    spec:
+      containers:
+      - name: {{ .Values.servicesName.showtimes }}
+        image: {{ .Values.servicesImage.showtimes }}
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.readinessProbe.endpoint }}
+            port: {{ .Values.deployment.readinessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.deployment.livenessProbe.endpoint }}
+            port: {{ .Values.deployment.livenessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.servicesName.movies }}
+  namespace: {{ .Release.Name }}
+  labels:
+    app: {{ .Values.servicesName.movies }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.servicesName.movies }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.servicesName.movies }}
+    spec:
+      containers:
+      - name: {{ .Values.servicesName.movies }}
+        image: {{ .Values.servicesImage.movies }}
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.readinessProbe.endpoint }}
+            port: {{ .Values.deployment.readinessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.deployment.livenessProbe.endpoint }}
+            port: {{ .Values.deployment.livenessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.servicesName.bookings }}
+  namespace: {{ .Release.Name }}
+  labels:
+    app: {{ .Values.servicesName.bookings }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.servicesName.bookings }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.servicesName.bookings }}
+    spec:
+      containers:
+      - name: {{ .Values.servicesName.bookings }}
+        image: {{ .Values.servicesImage.bookings }}
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.readinessProbe.endpoint }}
+            port: {{ .Values.deployment.readinessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.deployment.livenessProbe.endpoint }}
+            port: {{ .Values.deployment.livenessProbe.port }}
+          initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds }}
+

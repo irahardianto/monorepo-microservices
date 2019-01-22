@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: {{ .Values.servicesName.users }}
+  namespace: {{ .Release.Name }}
+spec: 
+  ports: 
+  - protocol: {{ .Values.service.protocol }}
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.deployment.port }}
+  selector: 
+    app: {{ .Values.servicesName.users }}
+  type: {{ .Values.service.type }}
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: {{ .Values.servicesName.movies }}
+  namespace: {{ .Release.Name }}
+spec: 
+  ports: 
+  - protocol: {{ .Values.service.protocol }}
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.deployment.port }}
+  selector: 
+    app: {{ .Values.servicesName.movies }}
+  type: {{ .Values.service.type }}
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: {{ .Values.servicesName.showtimes }}
+  namespace: {{ .Release.Name }}
+spec: 
+  ports: 
+  - protocol: {{ .Values.service.protocol }}
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.deployment.port }}
+  selector: 
+    app: {{ .Values.servicesName.showtimes }}
+  type: {{ .Values.service.type }}
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: {{ .Values.servicesName.bookings }}
+  namespace: {{ .Release.Name }}
+spec: 
+  ports: 
+  - protocol: {{ .Values.service.protocol }}
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.deployment.port }}
+  selector: 
+    app: {{ .Values.servicesName.bookings }}
+  type: {{ .Values.service.type }}

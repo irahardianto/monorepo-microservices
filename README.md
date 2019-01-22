@@ -152,7 +152,7 @@ multi stage build
 - [ ] Refactor Chi to Kataras/Muxie, if Muxie cost lower resources, benchmark!
 - [ ] Refactor database connection to enable reconnection upon connection dropped
 - [ ] Implement gRPC for the services
-- [ ] Auth implementation with JWT
+- [x] Auth implementation with JWT
 - [ ] Services JWT verification
 - [ ] Services JWT usage
 - [x] Kubernetes services deployment files
@@ -161,7 +161,7 @@ multi stage build
 - [x] Kubernetes Istio egress configurations
 - [x] Implement Liveness and Readiness probe for services
 - [ ] TLS to secure ingress
-- [ ] Refactor Kubernetes deployment to Helm Chart
+- [x] Refactor Kubernetes deployment to Helm Chart
 - [ ] CI pipeline using CircleCI, Travis?
 - [ ] Explore Rook operator
 - [ ] Federated Kubernetes
@@ -169,7 +169,7 @@ multi stage build
 Readme Todos
 
 - [x] Intro
-- [] Table of Content (Get Started)
+- [ ] Table of Content (Get Started)
 - [x] How to build the project
 - [ ] Project structure
 - [ ] Cmd

@@ -1,0 +1,60 @@
+{{- if .Values.deployment.istioEnabled -}}
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: cinema-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: "cinemaservice"
+  namespace: {{ .Release.Name }}
+spec:
+  hosts:
+  - "{{ .Release.Name }}.spicynoodle.xyz"
+  gateways:
+  - cinema-gateway
+  http:
+  - match:
+    - uri:
+        exact: /movies
+    route:
+    - destination:  
+        host: "{{ .Values.servicesName.movies }}.{{ .Release.Name }}.{{ .Values.istioVirtualService.localServicesEndpoint }}"
+        port:
+          number: 80
+  - match:
+    - uri:
+        exact: /bookings
+    route:
+    - destination:
+        host: "{{ .Values.servicesName.bookings }}.{{ .Release.Name }}.{{ .Values.istioVirtualService.localServicesEndpoint }}"
+        port:
+          number: 80
+  - match:
+    - uri:
+        exact: /users
+    route:
+    - destination:
+        host: "{{ .Values.servicesName.users }}.{{ .Release.Name }}.{{ .Values.istioVirtualService.localServicesEndpoint }}"
+        port:
+          number: 80
+  - match:
+    - uri:
+        exact: /showtimes
+    route:
+    - destination:
+        host: "{{ .Values.servicesName.showtimes }}.{{ .Release.Name }}.{{ .Values.istioVirtualService.localServicesEndpoint }}"
+        port:
+          number: 80
+{{- end }}

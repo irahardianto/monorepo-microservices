@@ -1,0 +1,59 @@
+# Default values for helmchart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+istioIngressGateway: {}
+
+istioVirtualService:
+  localServicesEndpoint: svc.cluster.local
+
+service:
+  protocol: TCP
+  port: 80
+  type: NodePort
+
+deployment:
+  istioEnabled: false
+  port: 8080
+  readinessProbe:  
+    port: 8080
+    endpoint: /healthy
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  livenessProbe:
+    port: 8080
+    endpoint: /healthz
+    initialDelaySeconds: 15
+    periodSeconds: 20
+
+resources:
+  limits:
+   cpu: 100m
+   memory: 128Mi
+  requests:
+   cpu: 100m
+   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+servicesName:
+  users: cinema-users
+  bookings: cinema-bookings
+  movies: cinema-movies
+  showtimes: cinema-showtimes
+
+servicesImage:
+  pullPolicy: IfNotPresent
+  users: irahardianto/cinema-users:latest
+  bookings: irahardianto/cinema-bookings:latest
+  movies: irahardianto/cinema-movies:latest
+  showtimes: irahardianto/cinema-showtimes:latest

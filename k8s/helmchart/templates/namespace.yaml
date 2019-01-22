@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Release.Name }}
+  labels: 
+  {{- if .Values.deployment.istioEnabled -}}
+    istio-injection: enabled
+  {{- end }}
