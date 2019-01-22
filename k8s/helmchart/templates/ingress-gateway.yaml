@@ -17,8 +17,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: "cinemaservice"
-  namespace: {{ .Release.Name }}
+  name: {{ .Release.Name }}
 spec:
   hosts:
   - "{{ .Release.Name }}.spicynoodle.xyz"
