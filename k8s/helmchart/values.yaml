@@ -18,7 +18,7 @@ service:
   type: NodePort
 
 deployment:
-  istioEnabled: false
+  istioEnabled: true
   port: 8080
   readinessProbe:  
     port: 8080
